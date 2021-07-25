@@ -1,7 +1,13 @@
 <script lang="ts">
   const gameboard = [...Array(7)].map((x) => Array(6).fill(""));
+  let turn = 0;
   function handleCellClick(i, j) {
-    gameboard[i][j] = "x";
+    if (gameboard[i][j] === "") {
+      turn++;
+      gameboard[i][j] = turn;
+      return;
+    }
+    console.log("filled cell");
   }
 </script>
 
@@ -12,7 +18,9 @@
       <div class="col">
         {#each col as row, j}
           <div
-            class={`cell ${row !== "" ? "fill" : ""}`}
+            class={`cell ${
+              row !== "" ? (row % 2 !== 0 ? "fill-x" : "fill-y") : ""
+            }`}
             on:click={() => handleCellClick(i, j)}
           >
             <p />
@@ -50,8 +58,11 @@
   .cell p {
     vertical-align: middle;
   }
-  .cell.fill {
+  .cell.fill-x {
     background-color: red;
+  }
+  .cell.fill-y {
+    background-color: yellow;
   }
   h1 {
     text-align: center;
