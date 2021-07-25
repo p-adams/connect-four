@@ -1,6 +1,8 @@
 <script lang="ts">
   const gameboard = [...Array(7)].map((x) => Array(6).fill(""));
-  console.log(gameboard);
+  function handleCellClick(i, j) {
+    gameboard[i][j] = "x";
+  }
 </script>
 
 <main>
@@ -9,8 +11,11 @@
     {#each gameboard as col, i}
       <div class="col">
         {#each col as row, j}
-          <div class="cell">
-            <p>{row}</p>
+          <div
+            class={`cell ${row !== "" ? "fill" : ""}`}
+            on:click={() => handleCellClick(i, j)}
+          >
+            <p />
           </div>
         {/each}
       </div>
@@ -31,7 +36,7 @@
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(7, auto);
-    grid-template-rows: repeat(6, auto);
+
     column-gap: 10px;
     row-gap: 10px;
     padding: 12px;
@@ -44,6 +49,9 @@
   }
   .cell p {
     vertical-align: middle;
+  }
+  .cell.fill {
+    background-color: red;
   }
   h1 {
     text-align: center;
