@@ -66,11 +66,11 @@
     &.empty {
       &:hover {
         box-shadow: 0 0 15px green;
+        cursor: pointer;
       }
     }
     &:hover {
       box-shadow: 0 0 12px red;
-      cursor: pointer;
     }
   }
 
