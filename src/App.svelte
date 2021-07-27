@@ -1,27 +1,29 @@
 <script lang="ts">
   const gameboard = [...Array(7)].map((x) => Array(6).fill(""));
   let turn = 0;
-  function handleCellClick(i, j) {
-    if (gameboard[i][j] === "") {
+  function handleCellClick(col: number, row: number) {
+    if (gameboard[col][row] === "") {
       turn++;
-      gameboard[i][j] = turn;
+      gameboard[col][row] = turn;
       return;
     }
     console.log("filled cell");
   }
+  // TODO: implement function to determine if move is a winning move
+  function isWinningMove() {}
 </script>
 
 <main>
   <h1>Connect Four</h1>
   <div class="gameboard">
-    {#each gameboard as col, i}
+    {#each gameboard as col, colIndex}
       <div class="col">
-        {#each col as row, j}
+        {#each col as row, rowIndex}
           <div
             class={`cell ${
               row !== "" ? (row % 2 !== 0 ? "fill-x" : "fill-y") : "empty"
             }`}
-            on:click={() => handleCellClick(i, j)}
+            on:click={() => handleCellClick(colIndex, rowIndex)}
           >
             <p />
           </div>
@@ -44,7 +46,6 @@
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(7, auto);
-
     column-gap: 10px;
     row-gap: 10px;
     padding: 12px;
@@ -70,7 +71,7 @@
       }
     }
     &:hover {
-      box-shadow: 0 0 12px red;
+      box-shadow: inset 0 0 2px black;
     }
   }
 
