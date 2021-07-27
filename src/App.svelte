@@ -19,7 +19,7 @@
         {#each col as row, j}
           <div
             class={`cell ${
-              row !== "" ? (row % 2 !== 0 ? "fill-x" : "fill-y") : ""
+              row !== "" ? (row % 2 !== 0 ? "fill-x" : "fill-y") : "empty"
             }`}
             on:click={() => handleCellClick(i, j)}
           >
@@ -31,7 +31,7 @@
   </div>
 </main>
 
-<style>
+<style lang="scss">
   :root {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
       Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
@@ -54,16 +54,26 @@
     height: 48px;
     background-color: white;
     border-radius: 100%;
+    p {
+      vertical-align: middle;
+    }
+    &.fill-x {
+      background-color: red;
+    }
+    &.fill-y {
+      background-color: yellow;
+    }
+    &.empty {
+      &:hover {
+        box-shadow: 0 0 15px green;
+      }
+    }
+    &:hover {
+      box-shadow: 0 0 12px red;
+      cursor: pointer;
+    }
   }
-  .cell p {
-    vertical-align: middle;
-  }
-  .cell.fill-x {
-    background-color: red;
-  }
-  .cell.fill-y {
-    background-color: yellow;
-  }
+
   h1 {
     text-align: center;
     color: cornflowerblue;
