@@ -1,4 +1,5 @@
 /node_modules/
 /dist/
 /.vscode/
+/src/firebase/config.ts
 .DS_Store
