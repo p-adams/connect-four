@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { db } from "./firebase";
   const gameboard = [...Array(7)].map((x) => Array(6).fill(""));
   let turn = 0;
   function handleCellClick(col: number, row: number) {
